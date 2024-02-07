@@ -12,7 +12,7 @@ function TableEmployees () {
     return (
         <div>
             <h1>Table Employees</h1>
-            <Button onClick={goBack}>Go back</Button>
+            <Button onClick={goBack}>Home</Button>
         </div>
 
     )
