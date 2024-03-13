@@ -1,17 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
-import Table from 'data-render-table';
+import Table from 'data-render-table'
 
-
-function TableEmployees () {
+// eslint-disable-next-line react/prop-types
+function TableEmployees ({employees}) {
     const navigate = useNavigate()
 
-    const goBack = () => {
-      navigate('/')
-    };
+    const goBack = () => { navigate('/') }
     return (
         <div>
-            <Table />
+            <Table employees={employees}/>
             <Button onClick={goBack}>Home</Button>
         </div>
 

@@ -1,12 +1,65 @@
+
+
+import { useState } from 'react'
 import { Box, Container, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import backgroundImage from '../assets/hrnet.png'
 
-
 const departments = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal']
+const states =  ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia' , 'Hawaii',  'Idaho', 'Illinois', 'Indiana']
 
-function CreateEmployee() {
+// eslint-disable-next-line react/prop-types
+function CreateEmployee({addEmployee} ) {
   const navigate = useNavigate()
+  const [employee, setEmployeeData] = useState({
+    firstName: '',
+    lastName: '',
+    birthDate: '',
+    startDate: '',
+    street: '',
+    city: '',
+    state: 'Alabama',
+    zipCode: '',
+    department: 'Sales'
+  })
+  const [employees, setEmployees] = useState([])
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setEmployeeData({ ...employee, [name]: value })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  
+    // Create a new employee object with the data from employee
+    const newEmployee = {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      birthDate: employee.birthDate,
+      startDate: employee.startDate,
+      street: employee.street,
+      city: employee.city,
+      state: employee.state,
+      zipCode: employee.zipCode,
+      department: employee.department
+    }
+    addEmployee(newEmployee)
+    setEmployees([...employees, newEmployee])
+  
+    setEmployeeData({
+      firstName: '',
+      lastName: '',
+      birthDate: '',
+      startDate: '',
+      street: '',
+      city: '',
+      state: 'Alabama',
+      zipCode: '',
+      department: 'Sales'
+    });
+  };
+  
 
   const viewEmployees = () => {
     navigate('/employees')
@@ -25,7 +78,7 @@ function CreateEmployee() {
     }}>
       <Container
         maxWidth="sm"
-        maxHeight="sm"
+        maxheight="sm"
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -57,23 +110,27 @@ function CreateEmployee() {
         >
           Create Employee
         </h2>
-        <form noValidate autoComplete="off">
-          <TextField fullWidth label="First Name" margin="normal" />
-          <TextField fullWidth label="Last Name" margin="normal" />
-          <TextField fullWidth label="Date of Birth" margin="normal" type="date" InputLabelProps={{ shrink: true }} />
-          <TextField fullWidth label="Start Date" margin="normal" type="date" InputLabelProps={{ shrink: true }} />
-          <TextField fullWidth label="Street" margin="normal" />
-          <TextField fullWidth label="City" margin="normal" />
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <TextField fullWidth label="First Name" margin="normal" name="firstName" value={employee.firstName} onChange={handleInputChange} />
+          <TextField fullWidth label="Last Name" margin="normal" name="lastName" value={employee.lastName} onChange={handleInputChange} />
+          <TextField fullWidth label="Date of Birth" margin="normal" type="date" InputLabelProps={{ shrink: true }} name="birthDate" value={employee.birthDate} onChange={handleInputChange} />
+          <TextField fullWidth label="Start Date" margin="normal" type="date" InputLabelProps={{ shrink: true }} name="startDate" value={employee.startDate} onChange={handleInputChange} />
+          <TextField fullWidth label="Street" margin="normal" name="street" value={employee.street} onChange={handleInputChange} />
+          <TextField fullWidth label="City" margin="normal" name="city" value={employee.city} onChange={handleInputChange} />
           <FormControl fullWidth margin="normal">
             <InputLabel id="state-select-label">State</InputLabel>
-            <Select labelId="state-select-label" label="State" value="Alabama">
-              <MenuItem value="Alabama">Alabama</MenuItem>
+            <Select labelId="state-select-label" label="state" name="state" value={employee.state} onChange={handleInputChange}>
+              {states.map((state) => (
+                <MenuItem key={state} value={state}>
+                  {state}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-          <TextField fullWidth label="Zip Code" margin="normal" />
+          <TextField fullWidth label="Zip Code" margin="normal" name="zipCode" value={employee.zipCode} onChange={handleInputChange} />
           <FormControl fullWidth margin="normal">
             <InputLabel id="department-select-label">Department</InputLabel>
-            <Select labelId="department-select-label" label="Department" defaultValue="Sales">
+            <Select labelId="department-select-label" label="Department" name="department" value={employee.department} onChange={handleInputChange}>
               {departments.map((department) => (
                 <MenuItem key={department} value={department}>
                   {department}
