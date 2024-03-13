@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { Table } from 'data-render-table';
+import { TableData }  from 'data-render-table';
 
 
 function TableEmployees () {
@@ -11,7 +11,7 @@ function TableEmployees () {
     };
     return (
         <div>
-            <Table />
+            <TableData />
             <Button onClick={goBack}>Home</Button>
         </div>
 
