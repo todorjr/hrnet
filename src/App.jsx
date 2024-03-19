@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
+import './style/form.css'
 import CreateEmployee from "./components/CreateEmployee"
 import TableEmployees from "./components/TableEmployees"
 

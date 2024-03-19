@@ -1,10 +1,6 @@
-
-
 import { useState } from 'react'
 import { Box, Container, TextField, Button, Select, MenuItem, InputLabel, FormControl, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import backgroundImage from '../assets/hrnet.png'
-
 const departments = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal']
 const states =  ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia' , 'Hawaii',  'Idaho', 'Illinois', 'Indiana']
 
@@ -23,15 +19,12 @@ function CreateEmployee({addEmployee} ) {
     department: 'Sales'
   })
   const [employees, setEmployees] = useState([])
-
   const [openModal, setOpenModal] = useState(false)
   const [modalMessage, setModalMessage] = useState('')
-
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setEmployeeData({ ...employee, [name]: value })
   }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (
@@ -64,7 +57,6 @@ function CreateEmployee({addEmployee} ) {
       }
       addEmployee(newEmployee)
       setEmployees([...employees, newEmployee])
-    
       setEmployeeData({
         firstName: '',
         lastName: '',
@@ -77,24 +69,19 @@ function CreateEmployee({addEmployee} ) {
         department: 'Sales'
       })
     }
-  };
-
+  }
   const handleCloseModal = () => {
     setOpenModal(false)
   }
-  
-
   const viewEmployees = () => {
     navigate('/employees')
   }
-
   return (
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundImage: `url(${backgroundImage})`,
       backgroundSize: 'contain',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
@@ -113,23 +100,9 @@ function CreateEmployee({addEmployee} ) {
           padding: '20px',
           marginTop: '50px',
       }}>
-        <h1 style={{
-          color: 'black',
-          fontSize: '32px',
-          fontFamily: 'Arial, sans-serif',
-          fontWeight: '600'
-          }}
-        >
-            HR Net
-        </h1>
+        <h1 className="mainTitle">HR Net</h1>
         <Button variant="contained" color="primary" display="block" onClick={viewEmployees}>View Current Employees</Button>
-        <h2 style={{
-          color: 'black',
-          fontSize: '20px',
-          textAlign: 'center',
-          fontFamily: 'Arial, sans-serif',
-          fontWeight: '400'
-          }}
+        <h2 className="subTitle"
         >
           Create Employee
         </h2>
@@ -180,5 +153,4 @@ function CreateEmployee({addEmployee} ) {
     </Box>
   )
 }
-
 export default CreateEmployee
