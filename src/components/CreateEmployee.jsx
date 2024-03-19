@@ -48,9 +48,9 @@ function CreateEmployee({addEmployee} ) {
       setModalMessage('Please fill in all required fields.')
       setOpenModal(true)
     } else {
-    
       setModalMessage('Employee added successfully!')
       setOpenModal(true)
+      
       const newEmployee = {
         firstName: employee.firstName,
         lastName: employee.lastName,
