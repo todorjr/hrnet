@@ -10,7 +10,9 @@ function TableEmployees ({employees}) {
     return (
         <div>
             <Table employees={employees}/>
-            <Button onClick={goBack}>Home</Button>
+            <div style={{ textAlign: 'center' }}>
+                <Button onClick={goBack}>Home</Button>
+            </div>
         </div>
 
     )
