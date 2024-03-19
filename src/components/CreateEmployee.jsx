@@ -1,7 +1,7 @@
 
 
 import { useState } from 'react'
-import { Box, Container, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import { Box, Container, TextField, Button, Select, MenuItem, InputLabel, FormControl, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import backgroundImage from '../assets/hrnet.png'
 
@@ -24,6 +24,9 @@ function CreateEmployee({addEmployee} ) {
   })
   const [employees, setEmployees] = useState([])
 
+  const [openModal, setOpenModal] = useState(false)
+  const [modalMessage, setModalMessage] = useState('')
+
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setEmployeeData({ ...employee, [name]: value })
@@ -31,6 +34,9 @@ function CreateEmployee({addEmployee} ) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    setModalMessage('Employee added successfully!')
+    setOpenModal(true)
   
     // Create a new employee object with the data from employee
     const newEmployee = {
@@ -57,8 +63,12 @@ function CreateEmployee({addEmployee} ) {
       state: 'Alabama',
       zipCode: '',
       department: 'Sales'
-    });
-  };
+    })
+  }
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
   
 
   const viewEmployees = () => {
@@ -142,6 +152,17 @@ function CreateEmployee({addEmployee} ) {
             Save
           </Button>
         </form>
+        <Dialog open={openModal} onClose={handleCloseModal}>
+        <DialogTitle>Employee Addition</DialogTitle>
+        <DialogContent>
+          <p>{modalMessage}</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
       </Container>
     </Box>
   )
