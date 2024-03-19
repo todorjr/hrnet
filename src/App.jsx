@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import CreateEmployee from "./components/CreateEmployee"
 import TableEmployees from "./components/TableEmployees"
 
-
 function App() {
-  const [employees, setEmployees] = useState([])
+
+  const [employees, setEmployees] = useState(() => {
+    const storedEmployees = localStorage.getItem('employees')
+    return storedEmployees ? JSON.parse(storedEmployees) : []
+  });
+
+  useEffect(() => {
+    localStorage.setItem('employees', JSON.stringify(employees))
+  }, [employees])
 
   const addEmployee = (employee) => {
     setEmployees([...employees, employee])
