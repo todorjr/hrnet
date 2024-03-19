@@ -84,28 +84,26 @@ function CreateEmployee({addEmployee} ) {
       justifyContent: 'center',
       backgroundSize: 'contain',
       backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
+      backgroundRepeat: 'no-repeat',
+      background: 'linear-gradient(332deg, #09bef24f, #00070b)'
+
     }}>
       <Container
         maxWidth="sm"
-        maxheight="sm"
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.2)',
-          backdropFilter: 'blur(10px)', 
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.5)', 
+          backgroundColor: '#fff',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
           borderRadius: '10px',
-          padding: '20px',
-          marginTop: '50px',
-      }}>
+          margin: '10px',
+          padding: '10px'
+        }}>
         <h1 className="mainTitle">HR Net</h1>
         <Button variant="contained" color="primary" display="block" onClick={viewEmployees}>View Current Employees</Button>
-        <h2 className="subTitle"
-        >
-          Create Employee
-        </h2>
+        <h2 className="subTitle">Create Employee</h2>
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField fullWidth label="First Name" margin="normal" name="firstName" value={employee.firstName} onChange={handleInputChange} />
           <TextField fullWidth label="Last Name" margin="normal" name="lastName" value={employee.lastName} onChange={handleInputChange} />
@@ -139,18 +137,19 @@ function CreateEmployee({addEmployee} ) {
           </Button>
         </form>
         <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>HR Net Form</DialogTitle>
-        <DialogContent>
-          <p>{modalMessage}</p>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModal} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+          <DialogTitle>HR Net Form</DialogTitle>
+          <DialogContent>
+            <p>{modalMessage}</p>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseModal} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </Box>
   )
 }
-export default CreateEmployee
+
+export default CreateEmployee;
