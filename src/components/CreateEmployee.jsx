@@ -33,38 +33,51 @@ function CreateEmployee({addEmployee} ) {
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-
-    setModalMessage('Employee added successfully!')
-    setOpenModal(true)
-  
-    // Create a new employee object with the data from employee
-    const newEmployee = {
-      firstName: employee.firstName,
-      lastName: employee.lastName,
-      birthDate: employee.birthDate,
-      startDate: employee.startDate,
-      street: employee.street,
-      city: employee.city,
-      state: employee.state,
-      zipCode: employee.zipCode,
-      department: employee.department
+    event.preventDefault();
+    if (
+      employee.firstName.trim() === '' ||
+      employee.lastName.trim() === '' ||
+      employee.birthDate.trim() === '' ||
+      employee.startDate.trim() === '' ||
+      employee.street.trim() === '' ||
+      employee.city.trim() === '' ||
+      employee.state.trim() === '' ||
+      employee.zipCode.trim() === '' ||
+      employee.department.trim() === ''
+    ) {
+      setModalMessage('Please fill in all required fields.')
+      setOpenModal(true)
+    } else {
+    
+      setModalMessage('Employee added successfully!')
+      setOpenModal(true)
+      const newEmployee = {
+        firstName: employee.firstName,
+        lastName: employee.lastName,
+        birthDate: employee.birthDate,
+        startDate: employee.startDate,
+        street: employee.street,
+        city: employee.city,
+        state: employee.state,
+        zipCode: employee.zipCode,
+        department: employee.department
+      }
+      addEmployee(newEmployee)
+      setEmployees([...employees, newEmployee])
+    
+      setEmployeeData({
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        startDate: '',
+        street: '',
+        city: '',
+        state: 'Alabama',
+        zipCode: '',
+        department: 'Sales'
+      })
     }
-    addEmployee(newEmployee)
-    setEmployees([...employees, newEmployee])
-  
-    setEmployeeData({
-      firstName: '',
-      lastName: '',
-      birthDate: '',
-      startDate: '',
-      street: '',
-      city: '',
-      state: 'Alabama',
-      zipCode: '',
-      department: 'Sales'
-    })
-  }
+  };
 
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -153,7 +166,7 @@ function CreateEmployee({addEmployee} ) {
           </Button>
         </form>
         <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>Employee Addition</DialogTitle>
+        <DialogTitle>HR Net Form</DialogTitle>
         <DialogContent>
           <p>{modalMessage}</p>
         </DialogContent>
