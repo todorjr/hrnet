@@ -16,8 +16,21 @@ function App() {
     localStorage.setItem('employees', JSON.stringify(employees))
   }, [employees])
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}/${month}/${year}`
+  }
+
   const addEmployee = (employee) => {
-    setEmployees([...employees, employee])
+    const formattedEmployee = {
+      ...employee,
+      birthDate: formatDate(employee.birthDate),
+      startDate: formatDate(employee.startDate)
+    }
+    setEmployees([...employees, formattedEmployee])
   }
 
   return (
