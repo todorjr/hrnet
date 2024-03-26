@@ -98,7 +98,7 @@ function CreateEmployee({addEmployee} ) {
           backdropFilter: 'blur(10px)',
           boxShadow: '0 4px 6px rgba(0, 0, 0, 0.5)',
           borderRadius: '10px',
-          margin: '60px',
+          margin: '20px',
           padding: '10px'
         }}>
         <h1 className="mainTitle">HR Net</h1>
